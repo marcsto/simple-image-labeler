@@ -5,11 +5,13 @@ Use the keyboard to label images, moving them into sub-directories ready for tra
 #### Usage:
   python label_images.py path_to_images
 
+#### Screenshot:
+Here's a screenshot of labeling hockey data into away jersey, home jersey, someone that isn't on the rink like a spectator or a referee 
 ![App screenshot](https://github.com/marcsto/simple-image-labeler/blob/main/screenshot.png)
 
 #### Directory structure:
-  The setup is simple: have a directory with images to label, and sub-directories in 
-  that directory which are the labels. Files will be moved to those directories as you
+  The setup is simple: setup a directory with all the images to label and sub-directories in 
+  that directory which are your label names (just create empty ones with the names of your labels if they don't exist). The sub-directories will automatically be detected as labels. Files will be moved to those sub-directories as you
   perform labeling.
   
 ![App screenshot](https://github.com/marcsto/simple-image-labeler/blob/main/screenshot_directory_structure.png)
