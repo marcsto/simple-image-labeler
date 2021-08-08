@@ -5,10 +5,14 @@ Use the keyboard to label images, moving them into sub-directories ready for tra
 #### Usage:
   python label_images.py path_to_images
 
+![App screenshot](https://github.com/marcsto/simple-image-labeler/blob/main/screenshot.png)
+
 #### Directory structure:
   The setup is simple: have a directory with images to label, and sub-directories in 
   that directory which are the labels. Files will be moved to those directories as you
   perform labeling.
+  
+![App screenshot](https://github.com/marcsto/simple-image-labeler/blob/main/screenshot_directory_structure.png)
 
 #### Keyboard shortcuts:
   The keyboard shortcut when labeling is the first letter of the label name (or the first
