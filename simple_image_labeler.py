@@ -101,7 +101,7 @@ def on_btn_click(btn_idx):
   """ When a user labels an image """
   label = labels[btn_idx]
   img_filename = image_filenames[img_idx]
-  percentage = "(" + str(round(img_idx + 1 / len(image_filenames), 2)) + "%)"
+  percentage = "(" + str(round((img_idx + 1) / len(image_filenames), 2)) + "%)"
   print("Img", img_idx + 1, "of", len(image_filenames), percentage, "Moving", img_filename, "to label", label)
   
   new_img_filename = os.path.join(path, label, image_filenames[img_idx])
