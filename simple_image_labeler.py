@@ -33,6 +33,7 @@ from os import walk
 import tkinter as tk
 from PIL import ImageTk, Image
 import sys
+import random
 
 img_idx = -1
 keyboard_shortcuts_indexed_by_letter = {}
@@ -58,7 +59,8 @@ def load_image_filenames(path):
   for (_, _, filenames) in walk(path):
       f.extend(filenames)
       break
-  f.sort()
+  #f.sort()
+  random.shuffle(f)
   return f
 
 """ Command line parameter """
@@ -93,6 +95,7 @@ def change_img():
   img = Image.open(os.path.join(path, image_filenames[img_idx]))
   # Resize the image. Use img.thumbnail since it preserves aspect ratio.
   img.thumbnail((500, 500), Image.ANTIALIAS)
+  #img = img.resize((round(img.size[0]*3.5), round(img.size[1]*3.5)), Image.ANTIALIAS)
   photo_img = ImageTk.PhotoImage(img)
   panel.configure(image=photo_img)
   panel.image = photo_img
@@ -101,7 +104,7 @@ def on_btn_click(btn_idx):
   """ When a user labels an image """
   label = labels[btn_idx]
   img_filename = image_filenames[img_idx]
-  percentage = "(" + str(round(img_idx + 1 / len(image_filenames), 2)) + "%)"
+  percentage = "(" + str(round((img_idx + 1) / len(image_filenames), 2)) + "%)"
   print("Img", img_idx + 1, "of", len(image_filenames), percentage, "Moving", img_filename, "to label", label)
   
   new_img_filename = os.path.join(path, label, image_filenames[img_idx])
@@ -111,6 +114,8 @@ def on_btn_click(btn_idx):
 def add_buttons():
   """ Add label buttons to the UI """
   fr_buttons = tk.Frame(window, relief=tk.RAISED, bd=2)
+  col = 0
+  row = 0
   for i, label in enumerate(labels):
     modified_label = ""
     if i in keyboard_shortcuts_indexed_by_idx:
@@ -119,8 +124,14 @@ def add_buttons():
           modified_label += "[" + letter + "]"
         else:
           modified_label += letter
+    else:
+      modified_label = label
     btn = tk.Button(fr_buttons, text=modified_label, command = lambda idx = i: on_btn_click(idx))
-    btn.grid(row=i, column=0, sticky="ew", padx=5, pady=5)
+    btn.grid(row=row, column=col, sticky="ew", padx=5, pady=5)
+    row += 1
+    if row >= 10:
+      row = 0
+      col += 1
   fr_buttons.grid(row=0, column=0, sticky="ns")
 
 def handle_keypress(event):
